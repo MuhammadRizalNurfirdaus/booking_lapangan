@@ -124,3 +124,9 @@ _modules/*
 
 /results/
 /phpunit*.xml
+node_modules/
+bun.lockb
+frontend/node_modules/
+backend/node_modules/
+frontend/bun.lockb
+backend/bun.lockb
