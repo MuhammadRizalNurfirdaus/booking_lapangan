@@ -119,14 +119,46 @@ _modules/*
 .phpintel
 /api/
 
-# Visual Studio Code
+# Visual Studio Code / IDE
 .vscode/
+.idea/
 
+# Build Results & Temp
 /results/
 /phpunit*.xml
+dist/
+build/
+out/
+.next/
+.vite/
+.vercel/
+
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.sqlite
+*.db
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+
+# Node & Package Managers
 node_modules/
 bun.lockb
-frontend/node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Explicit frontend/backend just in case
 backend/node_modules/
-frontend/bun.lockb
+frontend/node_modules/
+backend/dist/
+frontend/dist/
+frontend/build/
 backend/bun.lockb
+frontend/bun.lockb
