@@ -39,13 +39,13 @@ async function seed() {
   console.log("✅ Jadwal master seeded");
 
   // 2. Seed admin user
-  const hashedPassword = await bcrypt.hash("admin123", 10);
+  const hashedPassword = await bcrypt.hash("admin12345", 10);
   await sql`
     INSERT INTO users (nama_lengkap, email, password, role)
-    VALUES ('Administrator', 'admin@booking.com', ${hashedPassword}, 'admin')
+    VALUES ('Administrator', 'admin123@gmail.com', ${hashedPassword}, 'admin')
     ON CONFLICT (email) DO NOTHING
   `;
-  console.log("✅ Admin user seeded (admin@booking.com / admin123)");
+  console.log("✅ Admin user seeded (admin123@gmail.com / admin12345)");
 
   console.log("🎉 All seeders completed!");
   process.exit(0);

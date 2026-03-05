@@ -24,7 +24,8 @@ export default function Register() {
       await api.post('/auth/register', {
         nama_lengkap: form.nama_lengkap,
         email: form.email,
-        password: form.password
+        password: form.password,
+        pass_confirm: form.pass_confirm
       });
       navigate('/login');
     } catch (err: any) {

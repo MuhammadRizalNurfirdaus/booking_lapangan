@@ -22,6 +22,17 @@ Aplikasi pemesanan lapangan futsal berbasis web dengan fitur lengkap termasuk bo
 
 ---
 
+## 📚 Dokumentasi
+
+| Dokumen | Deskripsi |
+|---------|-----------|
+| **[API.md](API.md)** | Complete API documentation - semua endpoint dengan request/response examples |
+| **[TESTING.md](TESTING.md)** | Panduan testing lengkap - manual testing checklist untuk semua fitur |
+| **[DEPLOYMENT.md](DEPLOYMENT.md)** | Production deployment guide - VPS, Docker, Cloud platforms |
+| **[test-api.sh](test-api.sh)** | Automated API testing script - test semua endpoint dengan satu command |
+
+---
+
 ## Struktur Project
 
 ```
@@ -50,7 +61,7 @@ booking_lapangan/
 
 ## Fitur
 
-- **Autentikasi** — Login/Register manual & Google OAuth 2.0
+- **Autentikasi** — Login/Register (semua email) & Google OAuth 2.0
 - **Booking Lapangan** — Pilih tanggal, lihat jadwal tersedia, pesan langsung
 - **Konfirmasi Pembayaran** — Upload bukti pembayaran dengan pilihan bank
 - **Riwayat Pemesanan** — Lihat status booking & beri feedback/rating
@@ -61,19 +72,34 @@ booking_lapangan/
 
 ---
 
-## Cara Menjalankan
+## 🚀 Quick Start
 
 ### Prasyarat
 
-- [Bun](https://bun.sh/) v1.3+
-- PostgreSQL database (atau gunakan Aiven Cloud)
+- [Bun](https://bun.sh/) v1.3+ — Runtime JavaScript/TypeScript modern
+- PostgreSQL database (sudah dikonfigurasi di Aiven Cloud)
+
+### Setup Otomatis
+
+```bash
+# Clone repository
+git clone <repository-url>
+cd booking_lapangan
+
+# Jalankan setup script (install dependencies, migrate, seed database)
+./setup.sh
+
+# Start development servers (backend + frontend sekaligus)
+./start-dev.sh
+```
+
+**Atau Manual:**
 
 ### 1. Setup Backend
 
 ```bash
 cd backend
-cp .env.example .env   # Sesuaikan konfigurasi di .env
-bun install
+bun install            # Install dependencies
 bun run migrate        # Buat tabel database
 bun run seed           # Isi data awal (jadwal + admin)
 bun run dev            # Jalankan server di http://localhost:3000
@@ -83,15 +109,40 @@ bun run dev            # Jalankan server di http://localhost:3000
 
 ```bash
 cd frontend
-bun install
+bun install            # Install dependencies
 bun run dev            # Jalankan di http://localhost:5173
 ```
 
-### 3. Akses Aplikasi
+### 3. Testing
+
+```bash
+# Test semua API endpoints
+./test-api.sh
+
+# Atau testing manual (lihat TESTING.md untuk checklist lengkap)
+```
+
+### Akses Aplikasi
 
 - **Frontend:** http://localhost:5173
 - **Backend API:** http://localhost:3000
-- **Admin Login:** `admin@booking.com` / `admin123`
+- **Health Check:** http://localhost:3000/api/health
+
+**Default Admin Login:**
+- Email: `admin123@gmail.com`
+- Password: `admin12345`
+
+---
+
+## 🧪 Testing
+
+```bash
+# Test semua API endpoints dengan automated script
+./test-api.sh
+
+# Untuk testing manual lengkap, lihat TESTING.md
+# Checklist mencakup semua fitur: Auth, Booking, Admin Panel, dll
+```
 
 ---
 
@@ -126,7 +177,9 @@ PORT=3000
 
 ---
 
-## API Endpoints
+## 📡 API Endpoints
+
+**Ringkasan Endpoint Utama:**
 
 | Method | Endpoint | Keterangan |
 |--------|----------|------------|
@@ -135,31 +188,115 @@ PORT=3000
 | POST | `/api/auth/logout` | Logout |
 | GET | `/api/auth/me` | Cek session |
 | GET | `/api/auth/google` | Google OAuth redirect |
-| GET | `/api/auth/google/callback` | Google OAuth callback |
 | GET | `/api/galeri` | Daftar galeri |
-| GET | `/api/galeri/:id` | Detail galeri |
 | POST | `/api/kontak/kirim` | Kirim pesan kontak |
 | GET | `/api/booking/get-jadwal` | Ambil jadwal tersedia |
 | POST | `/api/booking/store` | Buat pemesanan |
-| GET | `/api/booking/konfirmasi/:kode` | Detail konfirmasi |
 | POST | `/api/booking/simpan-pembayaran` | Upload bukti bayar |
-| GET | `/api/profil` | Data profil |
-| POST | `/api/profil/update` | Update profil |
-| POST | `/api/profil/update-password` | Ubah password |
 | GET | `/api/user/riwayat` | Riwayat pemesanan |
 | POST | `/api/user/feedback` | Kirim feedback |
-| GET | `/api/admin/dashboard` | Dashboard admin |
-| GET | `/api/admin/pembayaran` | Daftar pembayaran |
-| POST | `/api/admin/jadwal/simpan` | CRUD jadwal |
-| GET | `/api/admin/users` | Daftar users |
-| ... | `/api/admin/...` | Endpoint admin lainnya |
+
+**📄 Dokumentasi Lengkap:** Lihat [API.md](API.md) untuk semua 50+ endpoints dengan request/response examples.
 
 ---
 
-## License
+**Admin Endpoints:** `/api/admin/*` - Dashboard, pembayaran, jadwal, users, galeri, pesan kontak, feedback
+
+📄 **Dokumentasi Lengkap:** Lihat [API.md](API.md) untuk semua 50+ endpoints dengan request/response examples.
+
+---
+
+## 🚀 Deployment
+
+Project ini siap untuk deployment ke production. Lihat [DEPLOYMENT.md](DEPLOYMENT.md) untuk panduan lengkap:
+
+- **VPS Deployment** (Nginx + Systemd)
+- **Docker Deployment** (Docker Compose)
+- **Cloud Platforms** (Vercel, Railway, Render)
+- **Database Migration** (PostgreSQL production setup)
+- **Environment Configuration** (Production environment variables)
+- **Security Best Practices** (HTTPS, CORS, Rate Limiting)
+
+---
+
+## 📝 Scripts Reference
+
+```bash
+# Setup & Development
+./setup.sh              # Initial setup (install deps, migrate, seed)
+./start-dev.sh          # Start both servers (backend + frontend)
+
+# Backend
+cd backend
+bun run dev             # Development server
+bun run migrate         # Run migrations
+bun run seed            # Seed database
+bun test                # Run tests
+
+# Frontend
+cd frontend
+bun run dev             # Development server
+bun run build           # Production build
+bun run preview         # Preview production build
+
+# Testing
+./test-api.sh           # Automated API tests
+# Manual testing: lihat TESTING.md
+```
+
+---
+
+## 📋 Development Checklist
+
+- [x] Backend API (Elysia + Bun)
+- [x] Frontend SPA (React + Vite)
+- [x] Database Schema & Migrations
+- [x] Authentication (JWT + Google OAuth)
+- [x] User Features (Booking, Galeri, Kontak, Profil)
+- [x] Admin Panel (Dashboard, CRUD semua tabel)
+- [x] File Uploads (Profil, Galeri, Bukti Pembayaran)
+- [x] Comprehensive Documentation
+- [ ] End-to-End Testing
+- [ ] Performance Optimization
+- [ ] Production Deployment
+- [ ] CI/CD Pipeline
+
+---
+
+## 📄 License
 
 MIT License
 
+Copyright (c) 2026 Muhammad Rizal Nurfirdaus
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 ---
 
-> **⚠️ Project ini masih dalam tahap pengembangan aktif.**
+## 👤 Developer
+
+**Muhammad Rizal Nurfirdaus**
+
+- GitHub: [@muhammadrizal]
+- Project Status: **Dalam Tahap Pengembangan (Development)**
+
+---
+
+**⚠️ Catatan:** Project ini masih dalam tahap pengembangan aktif. Fitur dan dokumentasi terus diperbarui.
+
