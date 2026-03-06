@@ -208,7 +208,7 @@ export default function Konfirmasi() {
               <hr style={{ borderColor: '#455a64' }} />
               <div className="d-flex justify-content-end align-items-center mt-3">
                 {pesanan.status_pembayaran === 'paid' && ['confirmed', 'completed'].includes(pesanan.status_pemesanan) && (
-                  <Link to={`/struk/cetak/${pesanan.kode_pemesanan}`} className="btn btn-success mr-2" target="_blank">
+                  <Link to={`/admin/pembayaran/cetak/${pesanan.id}`} className="btn btn-success mr-2" target="_blank">
                     <i className="fas fa-print"></i> Cetak Struk
                   </Link>
                 )}

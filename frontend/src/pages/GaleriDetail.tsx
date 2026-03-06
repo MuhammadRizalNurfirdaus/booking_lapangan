@@ -16,7 +16,7 @@ export default function GaleriDetail() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get(`/home/galeri/${id}`).then(res => {
+    api.get(`/galeri/${id}`).then(res => {
       setItem(res.data.item);
     }).finally(() => setLoading(false));
   }, [id]);

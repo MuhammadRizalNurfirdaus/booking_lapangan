@@ -15,8 +15,12 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
-      await login(email, password);
-      navigate('/');
+      const result = await login(email, password);
+      if (result.success) {
+        navigate('/');
+      } else {
+        setError(result.error || 'Login gagal');
+      }
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login gagal');
     } finally {

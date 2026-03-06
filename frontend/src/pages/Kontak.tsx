@@ -19,7 +19,7 @@ export default function Kontak() {
     setErrors([]);
     setLoading(true);
     try {
-      const res = await api.post('/home/kontak/kirim', form);
+      const res = await api.post('/kontak/kirim', form);
       setSuccess(res.data.message || 'Pesan berhasil dikirim!');
       setForm({ ...form, pesan: '' });
     } catch (err: any) {

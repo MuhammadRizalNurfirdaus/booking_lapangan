@@ -15,7 +15,7 @@ export default function Galeri() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/home/galeri').then(res => {
+    api.get('/galeri').then(res => {
       setFotos(res.data.fotos || []);
     }).finally(() => setLoading(false));
   }, []);

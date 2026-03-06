@@ -1,6 +1,6 @@
 # Booking Lapangan Futsal
 
-> **Status: Dalam Tahap Pengembangan (Development)**
+> **Status: Dalam Tahap Penyempurnaan (Refinement)**
 
 Aplikasi pemesanan lapangan futsal berbasis web dengan fitur lengkap termasuk booking online, pembayaran, galeri, feedback, dan panel admin.
 
@@ -256,6 +256,8 @@ bun run preview         # Preview production build
 - [x] Admin Panel (Dashboard, CRUD semua tabel)
 - [x] File Uploads (Profil, Galeri, Bukti Pembayaran)
 - [x] Comprehensive Documentation
+- [x] Bug Fixing & API Path Corrections
+- [x] Dark Theme UI Polish & Consistency
 - [ ] End-to-End Testing
 - [ ] Performance Optimization
 - [ ] Production Deployment
@@ -294,9 +296,30 @@ SOFTWARE.
 **Muhammad Rizal Nurfirdaus**
 
 - GitHub: [@muhammadrizal]
-- Project Status: **Dalam Tahap Pengembangan (Development)**
+- Project Status: **Dalam Tahap Penyempurnaan (Refinement)**
 
 ---
 
-**⚠️ Catatan:** Project ini masih dalam tahap pengembangan aktif. Fitur dan dokumentasi terus diperbarui.
+## 📝 Changelog (Maret 2026)
+
+### Bug Fixes
+- **Fix API Path Galeri** — Frontend Galeri page menggunakan path `/home/galeri` yang salah, diperbaiki menjadi `/galeri` sesuai backend route
+- **Fix API Path Kontak** — Frontend Kontak page menggunakan path `/home/kontak/kirim` yang salah, diperbaiki menjadi `/kontak/kirim`
+- **Fix Login Handler** — Login page tidak menggunakan return value dari `login()` dengan benar, menyebabkan error tidak ditampilkan
+- **Fix Feedback** — Field `id_pemesanan` tidak dikirim saat submit feedback dari halaman Riwayat
+- **Fix Cetak Struk Link** — Link "Cetak Struk" di halaman Konfirmasi mengarah ke route `/struk/cetak/` yang tidak ada, diperbaiki ke route admin print
+
+### UI/UX Improvements
+- **Dark Theme Modal** — Semua modal dialog di admin panel kini menggunakan dark theme yang konsisten
+- **Sidebar Active Link** — Highlight aktif dengan warna hijau (#1abc9c) di admin sidebar
+- **Dark Form Inputs** — Semua form input (date picker, select, textarea) kini memiliki dark styling yang konsisten
+- **Smooth Animations** — Tambahan animasi smooth untuk modal (fade-in + slide-down) dan transisi pada card/button
+- **Table Improvements** — Header tabel uppercase, font-weight lebih tebal, border-color konsisten
+- **Responsive Mobile** — Admin sidebar dengan smooth slide transition, hero section responsive
+- **Scrollbar Styling** — Custom dark scrollbar di seluruh aplikasi
+- **Badge Polish** — Font-weight dan letter-spacing yang lebih baik pada badge status
+
+---
+
+**⚠️ Catatan:** Project ini masih dalam tahap penyempurnaan. Fitur dan dokumentasi terus diperbarui.
 

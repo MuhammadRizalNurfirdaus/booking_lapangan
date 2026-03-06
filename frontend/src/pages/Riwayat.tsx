@@ -16,6 +16,7 @@ export default function Riwayat() {
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState('');
   const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackPemesananId, setFeedbackPemesananId] = useState<number | null>(null);
   const [rating, setRating] = useState(5);
   const [komentar, setKomentar] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -39,10 +40,11 @@ export default function Riwayat() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await api.post('/user/feedback', { rating, komentar });
+      await api.post('/user/feedback', { id_pemesanan: feedbackPemesananId, rating, komentar });
       setSuccess('Feedback berhasil dikirim!');
       setShowFeedback(false);
       setKomentar('');
+      setFeedbackPemesananId(null);
     } catch { } finally {
       setSubmitting(false);
     }
@@ -88,7 +90,7 @@ export default function Riwayat() {
               <td>
                 <Link to={`/booking/konfirmasi/${p.kode_pemesanan}`} className="btn btn-sm btn-info mr-1">Detail</Link>
                 {p.status_pemesanan === 'completed' && (
-                  <button className="btn btn-sm btn-warning mr-1" onClick={() => setShowFeedback(true)}>Beri Feedback</button>
+                  <button className="btn btn-sm btn-warning mr-1" onClick={() => { setFeedbackPemesananId(p.id); setShowFeedback(true); }}>Beri Feedback</button>
                 )}
                 {p.status_pemesanan === 'cancelled' && (
                   <button className="btn btn-sm btn-danger" onClick={() => handleDeleteRiwayat(p.id)}>Hapus</button>
